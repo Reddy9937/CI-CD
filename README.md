@@ -58,7 +58,6 @@ After you login to Jenkins,
       - Run the command to copy the Jenkins Admin Password - `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
       - Enter the Administrator password
       
-<img width="1291" alt="Screenshot 2023-02-01 at 10 56 25 AM" src="https://user-images.githubusercontent.com/43399466/215959008-3ebca431-1f14-4d81-9f12-6bb232bfbee3.png">
 
 ### Click on Install suggested plugins
 
