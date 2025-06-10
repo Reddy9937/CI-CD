@@ -58,25 +58,20 @@ pipeline {
             }
         }
 
-        stage('Update Deployment File') {
-            steps {
-                script {
-                    // Make changes to your deployment file
-                    sh '''
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" path/to/deployment.yml
-                        git add path/to/deployment.yml
-                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                    '''
-                }
-            }
+      stage('Update Deployment File') {
+    environment {
+        GIT_REPO_NAME = 'CI-CD'
+        GIT_USER_NAME = 'reddy9937'
+    }
+    steps {
+        script {
+            sh '''
+                git checkout main
+                sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" path/to/deployment.yml
+                git add path/to/deployment.yml
+                git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+            '''
         }
     }
-}
-
-                '''
-            }
-        }
-    }
-  }
 }
