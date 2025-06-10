@@ -44,8 +44,8 @@ pipeline {
     agent any
 
     environment {
-        GIT_USER_NAME = 'your-username'
-        GIT_REPO_NAME = 'your-repo'
+        GIT_USER_NAME = 'reddy9937'
+        GIT_REPO_NAME = 'CI-CD'
     }
 
     stages {
