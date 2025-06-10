@@ -40,16 +40,40 @@ pipeline {
             GIT_REPO_NAME = "CI-CD"
             GIT_USER_NAME = "reddy9937"
         }
-        steps {
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                    git config user.email "reddytanguturi79@gmail.com"
-                    git config user.name "Reddy9937"
-                    BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                    git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+        pipeline {
+    agent any
+
+    environment {
+        GIT_USER_NAME = 'your-username'
+        GIT_REPO_NAME = 'your-repo'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout the desired branch
+                    sh 'git checkout main'
+                }
+            }
+        }
+
+        stage('Update Deployment File') {
+            steps {
+                script {
+                    // Make changes to your deployment file
+                    sh '''
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" path/to/deployment.yml
+                        git add path/to/deployment.yml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    '''
+                }
+            }
+        }
+    }
+}
+
                 '''
             }
         }
