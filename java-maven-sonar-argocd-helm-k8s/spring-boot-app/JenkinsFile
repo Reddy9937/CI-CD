@@ -37,7 +37,7 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "CI-CD"
+            GIT_REPO_NAME = "Manifests_repo"
             GIT_USER_NAME = "reddy9937"
         }
         steps {
